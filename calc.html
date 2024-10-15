@@ -1,0 +1,176 @@
+<style>
+    body 
+    {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+    }
+    .header
+    {
+        background: linear-gradient(10deg, rgb(197, 10, 66), rgb(86, 215, 238));
+        color: black;
+        padding: 0.5%;
+        margin: 0%;
+    }
+    .about
+    {
+        background-color: rgb(7, 7, 7);
+        color: whitesmoke;
+        padding: 0.5%;
+        font-size: 25px;
+    } 
+    #color
+    {
+        color:palevioletred;
+    }
+    
+    .block {
+        
+        position: relative;
+        margin-top: 5%;
+        width: 30%;
+        height: auto;
+        background: linear-gradient(0deg, black, rgb(44, 43, 40));
+        padding: 20px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        display:inline-block;
+    }
+    .glow::before, .glow::after {
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        background: linear-gradient(45deg, rgb(58, 240, 58), rgb(245, 231, 37), rgb(194, 67, 89), rgb(42, 210, 216), rgb(231, 15, 15), orange, purple);
+        background-size: 400%;
+        width: calc(100% + 5px);
+        height: calc(100% + 4px);
+        z-index: -1;
+        animation: animate 20s linear infinite;
+    }
+    @keyframes animate {
+        0% {
+            background-position: 0 0;
+        }
+        50% {
+            background-position: 400% 0;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    .glow::after {
+        filter: blur(40px);
+    }
+    .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+    }
+    .calculator input {
+        grid-column: span 4;
+        height: 40px;
+        font-size: 24px;
+        text-align: right;
+        padding: 10px;
+        border: none;
+        background-color: rgb(58, 58, 58);
+        color: white;
+        border-radius: 5px;
+       
+    }
+    .calculator button 
+    {
+        padding: 20px;
+        font-size: 20px;
+        background-color: rgb(58, 58, 58);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        cursor:pointer;
+    }
+    .calculator button:hover 
+    {
+        background-color: rgb(199, 3, 3);
+    }
+    .calculator button.equal 
+    {
+        grid-column: span 1;
+        background-color: rgb(42, 241, 23);
+    }
+    .calculator button.equal:hover 
+    {
+        background-color: rgb(221, 5, 5);
+    }
+</style>
+<script>
+    function appendToResult(value) {
+        document.getElementById("result").value += value;
+    }
+
+    function clearResult() {
+        document.getElementById("result").value = "";
+    }
+   
+    function deleteone() {
+    let currentValue = document.getElementById("result").value;
+    document.getElementById("result").value = currentValue.slice(0, -1);
+    }
+
+
+
+    function calculate() {
+        try {
+            let result = eval(document.getElementById("result").value);
+            document.getElementById("result").value = result;
+        } catch (error) {
+            document.getElementById("result").value = "Error";
+        }
+    }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title> 
+    <link rel="icon" href="https://i.pinimg.com/236x/d5/d8/06/d5d8060ab2587c4916a470c30d060d82.jpg" >
+</head>
+<body>
+    <center>
+         <div class="header">
+            <h1>MY FIRST CALCULATOR</h1>
+        </div>
+         <div class="about">
+            <p><b><span id="color">About My First Calculator</span></b><br><br>This project was My First foray into developing software applications, specifically a basic calculator. The primary objective was to design a user-friendly, efficient, and functional calculator that can perform fundamental arithmetic operations.</p>
+        </div>
+
+    <div class="block glow">
+        <div class="calculator">
+            <input type="text" id="result" disabled>
+            <button onclick="clearResult()">AC</button>
+            <button onclick="deleteone()">DL</button>
+            <button onclick="appendToResult('(')">(</button>
+            <button onclick="appendToResult(')')">)</button>
+            <button onclick="appendToResult('/')">/</button>
+            <button onclick="appendToResult('7')">7</button>
+            <button onclick="appendToResult('8')">8</button>
+            <button onclick="appendToResult('9')">9</button>
+            <button onclick="appendToResult('*')">*</button>
+            <button onclick="appendToResult('4')">4</button>
+            <button onclick="appendToResult('5')">5</button>
+            <button onclick="appendToResult('6')">6</button>
+            <button onclick="appendToResult('-')">-</button>
+            <button onclick="appendToResult('1')">1</button>
+            <button onclick="appendToResult('2')">2</button>
+            <button onclick="appendToResult('3')">3</button>
+            <button onclick="appendToResult('+')">+</button>
+            <button onclick="appendToResult('0')">0</button>
+            <button onclick="appendToResult('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
+    </div> 
+    </center>
+</body>
+</html>
